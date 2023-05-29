@@ -1,10 +1,10 @@
 const slider = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
-const slideWidth = slides[0].clientWidth;
 let currentIndex = 0;
+let slideWidth = slider.clientWidth;
 
 function goToSlide(index) {
-  slider.style.transform = `translateX(-${slideWidth * index}px)`;
+  slider.style.transform = `translateX(-${index * slideWidth}px)`;
 }
 
 function nextSlide() {
@@ -12,4 +12,9 @@ function nextSlide() {
   goToSlide(currentIndex);
 }
 
-setInterval(nextSlide, 5000); // Transition every 5 seconds (adjust as needed)
+window.addEventListener('resize', () => {
+  slideWidth = slider.clientWidth;
+  goToSlide(currentIndex);
+});
+
+setInterval(nextSlide, 2000); 
